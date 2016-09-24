@@ -11,23 +11,29 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 
 <body>
 
-<p id="output1">First Para</p>
+<p id="output1">Intro</p>
 
-<p id="o1"></p>
+Zip Code: <input type="text" id="myText" value="30092">
+
+<button>Congressmen</button>
+
+<p id="names"></p>
 
 <script>
 
-var pressed = false;
+pressed = false; //placeholder
 
 $(document).ready(function(){
   $("button").click(function(){
     if(!pressed)
     {
-        $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+        document.getElementById('names').innerHTML = "";
+        var zipcode = document.getElementById("myText").value;
+        
+        $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + zipcode + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
             for (var i = 0; i < result.results.length; i++) {
-              document.getElementById('o1').innerHTML =  (document.getElementById('o1').innerHTML + result.results[i].first_name + "<br>");
+              document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name + "<br>");
             }
-            pressed = true;
         });
     }
   });
@@ -36,8 +42,6 @@ $(document).ready(function(){
   document.getElementById('output1').innerHTML = "Welcome to the testing area for RepRec!";
 
 </script>
-
-<button>30092 Congressmen</button>
 
 </body>
 </html>
