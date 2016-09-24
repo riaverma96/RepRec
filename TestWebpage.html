@@ -19,7 +19,7 @@ Detailed Representative Information: <input type="text" id="repsearchtext_first"
 <p id="represults"></p>
 <p id="represults_2"></p>
 
-Search Bill by Committee: <input type="text" id="commbillsearchtext" value ="">
+Search Bill by Committee Code: <input type="text" id="commbillsearchtext" value ="">
 <button id = "commbillsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="commbillclear" onclick="buttonHandler(this)">Clear</button>
 <p id="commbillresults"></p>
 
@@ -124,7 +124,8 @@ function buttonHandler(button)
 
                     $.getJSON("http://congress.api.sunlightfoundation.com/committees?member_ids=" + id + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
                         for (var j = 0; j < result.results.length; j++) {
-                            document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + result.results[j].name + "<br>");
+                            document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + result.results[j].name + " ("
+                                + result.results[j].committee_id + ")" + "<br>");
                         }
                     });
 
@@ -136,15 +137,10 @@ function buttonHandler(button)
             document.getElementById('commbillresults').innerHTML = "";
             var searchText = document.getElementById("commbillsearchtext").value;
 
-            $.getJSON("http://congress.api.sunlightfoundation.com/committees?query=" + searchText + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
-                var cid = result.results.committee_id;
-                
-                $.getJSON("http://congress.api.sunlightfoundation.com/bills?committee_ids=" + cid + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
-                    for (var j = 0; j < result.results.length; j++) {
-                        document.getElementById('commbillresults').innerHTML =  (document.getElementById('commbillresults').innerHTML + result.results[j].short_title + "<br>");
-                    }
-                });
-
+            $.getJSON("http://congress.api.sunlightfoundation.com/bills?committee_ids=" + searchText + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                for (var i = 0; i < result.results.length; i++) {
+                    document.getElementById('commbillresults').innerHTML =  (document.getElementById('commbillresults').innerHTML + result.results[i].short_title + "<br>");
+                }
             });
         }
         else if (button.id == "congressmenclear")
