@@ -21,11 +21,11 @@ Section: x
 <<<<<<< Updated upstream
 <p id="output1">[welcome message]</p>
 Zip Code: <input type="text" id="myText" value="30092">
-<button id="congressmenbutton" onclick="buttonHandler(this)">Congressmen</button>
+<button id="congressmenbutton" onclick="buttonHandler(this)">Congressmen</button> <button id="congressmenclear" onclick="buttonHandler(this)">Clear</button>
 <p id="names"></p>
 
 Bill Search: <input type="text" id="billsearchText" value = "">
-<button id = "billsearchbutton" onclick="buttonHandler(this)">Search</button>
+<button id = "billsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="billsearchclear" onclick="buttonHandler(this)">Clear</button>
 <p id="billResults"></p>
 
 <script>
@@ -43,6 +43,12 @@ function buttonHandler(button)
                 for (var i = 0; i < result.results.length; i++) {
                     document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
                         + " " + result.results[i].last_name + "<br>");
+                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + result.results[i].oc_email + "<br>");
+                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + result.results[i].phone + "<br>");
+                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        + result.results[i].office + "<br>");
                 }
             });
         }
@@ -60,6 +66,14 @@ function buttonHandler(button)
                     }
                 }
             });
+        }
+        else if (button.id == "congressmenclear")
+        {
+            document.getElementById('names').innerHTML = "";
+        }
+        else if (button.id == "billsearchclear")
+        {
+            document.getElementById('billResults').innerHTML = "";
         }
 }
 
