@@ -5,37 +5,30 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <html>
 
 <head>
-<title>My Title</title>
+<title>RepRec Testing</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
 
-<p id="output1">Intro</p>
-
+<p id="output1">[welcome message]</p>
 Zip Code: <input type="text" id="myText" value="30092">
-
 <button>Congressmen</button>
-
 <p id="names"></p>
 
 <script>
 
-pressed = false; //placeholder
-
 $(document).ready(function(){
   $("button").click(function(){
-    if(!pressed)
-    {
-        document.getElementById('names').innerHTML = "";
-        var zipcode = document.getElementById("myText").value;
-        
-        $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + zipcode + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
-            for (var i = 0; i < result.results.length; i++) {
-              document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name + "<br>");
-            }
-        });
-    }
+    document.getElementById('names').innerHTML = "";
+    var zipcode = document.getElementById("myText").value;
+
+    $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + zipcode + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+        for (var i = 0; i < result.results.length; i++) {
+            document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
+                + " " + result.results[i].last_name + "<br>");
+        }
+    });
   });
 });
 
