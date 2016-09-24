@@ -1,8 +1,8 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- 
-This is a skeleton html file that you can use to get you started on each new 
+<!--
+This is a skeleton html file that you can use to get you started on each new
 HTML project
 
 Name: Your Name Here
@@ -22,16 +22,16 @@ Section: x
 
 <script>
 
-    $(function(){
-
-        $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
-           $.each(result, function(i, field){
-                console.log($("div").append(field + " "));
-            });
-        });
-
+  $(function(){
+    $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+      $.each(result, function(){
+        for (var i = 0; i < result.results.length; i++) {
+          console.log(result.results[i].first_name);
+        }
+      });
     });
-            
+  });
+
 
 
 </script>
