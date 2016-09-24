@@ -1,14 +1,7 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--
-This is a skeleton html file that you can use to get you started on each new
-HTML project
 
-Name: Your Name Here
-Class: CIS 3303
-Section: x
--->
 <html>
 
 <head>
@@ -18,23 +11,26 @@ Section: x
 
 <body>
 
-<p>This is the first paragraph in the body of your new HTML file!</p>
+<p id="output1">First Para</p>
+
+<p id="o1"></p>
 
 <script>
 
   $(function(){
     $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
         for (var i = 0; i < result.results.length; i++) {
-          document.write(result.results[i].first_name);
+          document.getElementById('o1').innerHTML =  (document.getElementById('o1').innerHTML + result.results[i].first_name + "<br>");
         }
     });
   });
 
-
+  document.getElementById('output1').innerHTML = "This is the first paragraph in the body of your new HTML file!";
 
 </script>
 
-<p> The script should have happened. </p>
+<p id="output1"> The script should have happened. </p>
+<p id="output1"> I SHOULD APPEAR </p>
 
 </body>
 </html>
