@@ -24,11 +24,9 @@ Section: x
 
   $(function(){
     $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
-      $.each(result, function(){
         for (var i = 0; i < result.results.length; i++) {
           console.log(result.results[i].first_name);
         }
-      });
     });
   });
 
