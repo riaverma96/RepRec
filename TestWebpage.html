@@ -13,6 +13,7 @@ Section: x
 
 <head>
 <title>My Title</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -21,10 +22,17 @@ Section: x
 
 <script>
 
-    $.getJSON('congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67', function (data)
-    {
-        console.log(data[0].first_name);
+    $(function(){
+
+        $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=30092&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+           $.each(result, function(i, field){
+                console.log($("div").append(field + " "));
+            });
+        });
+
     });
+            
+
 
 </script>
 
