@@ -141,58 +141,56 @@
                 consequat. Duis aute irure dolor.
             </p>
         </div>
-    </div>
+    </div> -->
 
     <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
+        <h2 class="content-head is-center">Start your search</h2>
 
         <div class="pure-g">
             <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
                 <form class="pure-form pure-form-stacked">
                     <fieldset>
 
-                        <label for="name">Your Name</label>
-                        <input id="name" type="text" placeholder="Your Name">
+                        <label for="name">Search for representative by your location</label>
+                        <input id="zip" type="text" placeholder="Zip Code" value="zipCode" onclick="buttonHandler(this)">
 
-
-                        <label for="email">Your Email</label>
-                        <input id="email" type="email" placeholder="Your Email">
-
-                        <label for="password">Your Password</label>
-                        <input id="password" type="password" placeholder="Your Password">
-
-                        <button type="submit" class="pure-button">Sign Up</button>
+                        <button id = "congressmenbutton" type="submit" class="pure-button">Go</button>
                     </fieldset>
                 </form>
             </div>
 
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
+            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+                <form class="pure-form pure-form-stacked">
+                    <fieldset>
 
-                <h4>More Information</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+                        <label for="name">Search for bills by key word</label>
+                        <input id="keyword" type="text" placeholder="Key Word" value="word" onclick="buttonHandler(this)">
+
+
+                        <button id = "keysearchbutton" type="submit" class="pure-button">Go</button>
+
+                    </fieldset>
+                </form>
             </div>
-        </div>
 
     </div>
 
-    <div class="footer l-box is-center">
+    <!-- <div class="footer l-box is-center">
         View the source of this layout to learn more. Made with love by the YUI Team.
-    </div>
+    </div> -->
 
-</div> -->
+</div>
 
 
-
+<script>
+function buttonHandler(button) {
+    if (button.id == "congressmenbutton") {
+        var zipcode = document.getElementById("zip").value;
+    } else if (button.id == "keysearchbutton") {
+        var keyword = document.getElementById("keyword").value;
+    }
+}
+</script>
 
 
 
