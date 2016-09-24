@@ -11,55 +11,49 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   <script src="http://d3js.org/d3.v3.min.js"></script>
 </head>
 
-<body ng-app="spicyApp2">
+<!-- // call the app -->
+<body ng-app="d3App">
 
-  <div flex layout = "column">
+<!-- // insert the controller -->
+    <div  ng-controller="barchartController">
 
-    <div layout = "row">
-      <md-input-container flex= "60" class="md-block" -webkit-column-width: "1000px">
-        <label>Zip Code</label>
-        <input ng-model="user.zipcode">
-      </md-input-container>
+        <div class="title">{{title}}</div>
 
-      <md-input-container flex= "60" class="md-block">
-        <button> Congressman </button>
-        <button> Clear </button>
-      </md-input-container>
+        <!-- // add the input boxes to make interactive -->
+        <d3-bars data="d3Data" label="name"></d3-bars>
+
+        <br>
+
+        <span>Peter</span>
+        <br>
+        <input type="text" ng-model="d3Data[0].score"/>
+        <br>
+
+        <span>Francis</span>
+        <br>
+        <input type="text" ng-model="d3Data[1].score"/>
+        <br>
+
+        <span>Tabatha</span>
+        <br>
+        <input type="text" ng-model="d3Data[2].score"/>
+        <br>
+
+        <span>Amber</span>
+        <br>
+        <input type="text" ng-model="d3Data[3].score"/>
+        <br>
+
+        <span>David</span>
+        <br>
+        <input type="text" ng-model="d3Data[4].score"/>
+      </div>
+
     </div>
-
-    <div layout = "row">
-      <md-input-container flex class="md-block">
-        <label>Bill Address</label>
-        <input ng-model="user.address">
-      </md-input-container>
-      <button> Search </button>
-      <button> Clear </button>
-    </div>
-
-  </div>
-
-  <p id="output1">[welcome message]</p>
-  Zip Code: <input type="text" id="myText" value="30092">
-  <button id="congressmenbutton" onclick="buttonHandler(this)">Congressmen</button> <button id="congressmenclear" onclick="buttonHandler(this)">Clear</button>
-  <p id="names"></p>
-
-  Bill Search: <input type="text" id="billsearchText" value = "">
-  <button id = "billsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="billsearchclear" onclick="buttonHandler(this)">Clear</button>
-  <p id="billResults"></p>
-
-  <div ng-controller="SpicyController">
-   <input ng-model="customSpice">
-   <button ng-click="spicy('chili')">Chili</button>
-   <button ng-click="spicy(customSpice)">Custom spice</button>
-
-   <div ng-repeat="representative in representatives ">
-      {{representative.first_name + " "
-      + representative.last_name + ", "
-      + representative.party}}
-   </div>
-  </div>
-
 
 </body>
+
+
+
 
 </html>
