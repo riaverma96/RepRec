@@ -4,6 +4,9 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="app.js"></script>
     <title>Rep Rec</title>
 
 
@@ -152,9 +155,18 @@
                     <fieldset>
 
                         <label for="name">Search for representative by your location</label>
-                        <input id="zip" type="text" placeholder="Zip Code" value="zipCode" onclick="buttonHandler(this)">
 
-                        <button id = "congressmenbutton" type="submit" class="pure-button">Go</button>
+                        <div ng-app="zipApp"
+                              ng-controller="zipController">
+                          <input id="zip"
+                                ng-model="zipcode"
+                                type="text" placeholder="Zip Code"
+                                value="zipCode">
+                        </div>
+                        <button id = "congressmenbutton"
+                                type="submit"
+                                class="pure-button"
+                                ng-click="zipClick ">Go</button>
                     </fieldset>
                 </form>
             </div>
@@ -164,10 +176,13 @@
                     <fieldset>
 
                         <label for="name">Search for bills by key word</label>
-                        <input id="keyword" type="text" placeholder="Key Word" value="word" onclick="buttonHandler(this)">
+                        <input id="keyword" type="text" placeholder="Key Word" value="word">
 
 
-                        <button id = "keysearchbutton" type="submit" class="pure-button">Go</button>
+                        <button id = "keysearchbutton"
+                                type="submit"
+                                class="pure-button"
+                                onclick="buttonHandler(this)">Go</button>
 
                     </fieldset>
                 </form>
@@ -191,6 +206,8 @@ function buttonHandler(button) {
     }
 }
 </script>
+
+
 
 
 
