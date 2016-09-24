@@ -17,10 +17,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    <button ng-click="spicy(customSpice)">Custom spice</button>
 
    <div ng-repeat="representative in representatives ">
-      {{representative}}
+      {{representative.first_name + " "
+      + representative.last_name + ", "
+      + representative.party}}
    </div>
 
-   <p>The food is {{spice}} spicy!</p>
   </div>
 </body>
 
