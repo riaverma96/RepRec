@@ -1,16 +1,27 @@
-<html>
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-controller-spicy-2-production</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
 
-<script src="jquery-1.12.4.min.js"></script>
-HELLOOO
-<script>
-function myFunction() {
-    document.getElementById("demo").innerHTML = "Paragraph changed.";
-}
-document.write("hi");
-</script>
+<body ng-app="spicyApp2">
+  <div ng-controller="SpicyController">
+   <input ng-model="customSpice">
+   <button ng-click="spicy('chili')">Chili</button>
+   <button ng-click="spicy(customSpice)">Custom spice</button>
 
-<script src = "zip.js">
+   <div ng-repeat="representative in representatives ">
+      {{representative}}
+   </div>
 
-</script>
-ANYBODY THERE?
+   <p>The food is {{spice}} spicy!</p>
+  </div>
+</body>
+
 </html>
