@@ -1,14 +1,6 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--
-This is a skeleton html file that you can use to get you started on each new
-HTML project
-
-Name: Your Name Here
-Class: CIS 3303
-Section: x
--->
 
 <html>
 
@@ -18,9 +10,18 @@ Section: x
 <body>
 
 <p id="output1">[welcome message]</p>
-Zip Code: <input type="text" id="myText" value="30092">
+Zip Code: <input type="text" id="myText" value="">
 <button id="congressmenbutton" onclick="buttonHandler(this)">Congressmen</button> <button id="congressmenclear" onclick="buttonHandler(this)">Clear</button>
 <p id="names"></p>
+
+Detailed Representative Information: <input type="text" id="repsearchtext_first" value = "First Name"><input type="text" id="repsearchtext_last" value = "Last Name">
+<button id = "repsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="repsearchclear" onclick="buttonHandler(this)">Clear</button>
+<p id="represults"></p>
+<p id="represults_2"></p>
+
+Search Bill by Committee: <input type="text" id="commbillsearchtext" value ="">
+<button id = "commbillsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="commbillclear" onclick="buttonHandler(this)">Clear</button>
+<p id="commbillresults"></p>
 
 Bill Search: <input type="text" id="billsearchText" value = "">
 <button id = "billsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="billsearchclear" onclick="buttonHandler(this)">Clear</button>
@@ -38,15 +39,45 @@ function buttonHandler(button)
             var zipcode = document.getElementById("myText").value;
 
             $.getJSON("http://congress.api.sunlightfoundation.com/legislators/locate?zip=" + zipcode + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "House: <br><br>");
                 for (var i = 0; i < result.results.length; i++) {
-                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
-                        + " " + result.results[i].last_name + "<br>");
-                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                        + result.results[i].oc_email + "<br>");
-                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                        + result.results[i].phone + "<br>");
-                    document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-                        + result.results[i].office + "<br>");
+                    if (result.results[i].chamber == "house")
+                    {
+                        if (result.results[i].party == "R")
+                        {
+                            document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
+                                + " " + result.results[i].last_name + " (<font color = \"ff0000\">" + result.results[i].party + "</font>)" +  "<br>");
+                        } else {
+                            document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
+                                + " " + result.results[i].last_name + " (<font color = \"0000ff\">" + result.results[i].party + "</font>)" +  "<br>");
+                        }
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].oc_email + "<br>");
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].phone + "<br>");
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].office + "<br>");
+                    }
+                }
+                document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "<br> Senate: <br><br>");
+                for (var i = 0; i < result.results.length; i++) {
+                    if (result.results[i].chamber == "senate")
+                    {
+                        if (result.results[i].party == "R")
+                        {
+                            document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
+                                + " " + result.results[i].last_name + " (<font color = \"ff0000\">" + result.results[i].party + "</font>)" +  "<br>");
+                        } else {
+                            document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + result.results[i].first_name
+                                + " " + result.results[i].last_name + " (<font color = \"0000ff\">" + result.results[i].party + "</font>)" +  "<br>");
+                        }
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].oc_email + "<br>");
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].phone + "<br>");
+                        document.getElementById('names').innerHTML =  (document.getElementById('names').innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                            + result.results[i].office + "<br>");
+                    }
                 }
             });
         }
@@ -65,6 +96,57 @@ function buttonHandler(button)
                 }
             });
         }
+        else if (button.id == "repsearchbutton")
+        {
+            document.getElementById('represults').innerHTML = "";
+            var searchText_first = document.getElementById("repsearchtext_first").value;
+            var searchText_last = document.getElementById("repsearchtext_last").value;
+
+            $.getJSON("http://congress.api.sunlightfoundation.com/legislators?first_name=" + searchText_first + "&last_name=" + searchText_last
+                + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                for (var i = 0; i < result.results.length; i++) {
+                    if (result.results[i].party == "R")
+                    {
+                        document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + result.results[i].first_name
+                            + " " + result.results[i].last_name + " (<font color = \"ff0000\">" + result.results[i].party + "</font>)" +  "<br><br>");
+                    } else {
+                        document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + result.results[i].first_name
+                            + " " + result.results[i].last_name + " (<font color = \"0000ff\">" + result.results[i].party + "</font>)" +  "<br><br>");
+                    }
+
+                    document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + "<b>Email:</b> " + result.results[i].oc_email + "<br>");
+                    document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + "<b>Phone:</b> " + result.results[i].phone + "<br>");
+                    document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + "<b>Address:</b> " + result.results[i].office + "<br><br>");
+
+                    document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + "<b>Committees:</b> " + "<br>");
+
+                    var id = result.results[i].bioguide_id;
+
+                    $.getJSON("http://congress.api.sunlightfoundation.com/committees?member_ids=" + id + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                        for (var j = 0; j < result.results.length; j++) {
+                            document.getElementById('represults').innerHTML =  (document.getElementById('represults').innerHTML + result.results[j].name + "<br>");
+                        }
+                    });
+
+                }
+            });
+        }
+        else if (button.id == "commbillsearchbutton")
+        {
+            document.getElementById('commbillresults').innerHTML = "";
+            var searchText = document.getElementById("commbillsearchtext").value;
+
+            $.getJSON("http://congress.api.sunlightfoundation.com/committees?query=" + searchText + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                var cid = result.results.committee_id;
+                
+                $.getJSON("http://congress.api.sunlightfoundation.com/bills?committee_ids=" + cid + "&apikey=f7de381a2c9040249a24a93ce8b88c67", function(result){
+                    for (var j = 0; j < result.results.length; j++) {
+                        document.getElementById('commbillresults').innerHTML =  (document.getElementById('commbillresults').innerHTML + result.results[j].short_title + "<br>");
+                    }
+                });
+
+            });
+        }
         else if (button.id == "congressmenclear")
         {
             document.getElementById('names').innerHTML = "";
@@ -72,6 +154,14 @@ function buttonHandler(button)
         else if (button.id == "billsearchclear")
         {
             document.getElementById('billResults').innerHTML = "";
+        }
+        else if (button.id == "repsearchclear")
+        {
+            document.getElementById('represults').innerHTML = "";
+        }
+        else if (button.id == "commbillclear")
+        {
+            document.getElementById('commbillresults').innerHTML = "";
         }
 }
 
