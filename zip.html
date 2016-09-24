@@ -8,9 +8,45 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   <title>Example - example-controller-spicy-2-production</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script src="app.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
 </head>
 
 <body ng-app="spicyApp2">
+
+  <div flex layout = "column">
+
+    <div layout = "row">
+      <md-input-container flex= "60" class="md-block" -webkit-column-width: "1000px">
+        <label>Zip Code</label>
+        <input ng-model="user.zipcode">
+      </md-input-container>
+
+      <md-input-container flex= "60" class="md-block">
+        <button> Congressman </button>
+        <button> Clear </button>
+      </md-input-container>
+    </div>
+
+    <div layout = "row">
+      <md-input-container flex class="md-block">
+        <label>Bill Address</label>
+        <input ng-model="user.address">
+      </md-input-container>
+      <button> Search </button>
+      <button> Clear </button>
+    </div>
+
+  </div>
+
+  <p id="output1">[welcome message]</p>
+  Zip Code: <input type="text" id="myText" value="30092">
+  <button id="congressmenbutton" onclick="buttonHandler(this)">Congressmen</button> <button id="congressmenclear" onclick="buttonHandler(this)">Clear</button>
+  <p id="names"></p>
+
+  Bill Search: <input type="text" id="billsearchText" value = "">
+  <button id = "billsearchbutton" onclick="buttonHandler(this)">Search</button> <button id="billsearchclear" onclick="buttonHandler(this)">Clear</button>
+  <p id="billResults"></p>
+
   <div ng-controller="SpicyController">
    <input ng-model="customSpice">
    <button ng-click="spicy('chili')">Chili</button>
@@ -21,8 +57,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       + representative.last_name + ", "
       + representative.party}}
    </div>
-
   </div>
+
+
 </body>
 
 </html>
