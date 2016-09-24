@@ -4,7 +4,9 @@ angular.module('d3App', [
     'd3App.controllers',
     'd3App.directives'
     ]);
-
+angular.module('zipApp', [
+    'zipApp.controllers'
+    ]);
 
 // setup dependency injection
 angular.module('d3', []);
