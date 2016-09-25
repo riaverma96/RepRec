@@ -166,7 +166,7 @@
                         <button id = "congressmenbutton"
                                 type="submit"
                                 class="pure-button"
-                                ng-click="zipClick ">Go</button>
+                                ng-click="zipClick(congressmenbutton)">Go</button>
                     </fieldset>
                 </form>
             </div>
@@ -176,13 +176,19 @@
                     <fieldset>
 
                         <label for="name">Search for bills by key word</label>
-                        <input id="keyword" type="text" placeholder="Key Word" value="word">
 
 
+                        <div ng-app="zipApp"
+                              ng-controller="zipController">
+                          <input id="zip"
+                                ng-model="zipcode"
+                                type="text" placeholder="Key Word"
+                                value="word">
+                        </div>
                         <button id = "keysearchbutton"
                                 type="submit"
                                 class="pure-button"
-                                onclick="buttonHandler(this)">Go</button>
+                                ng-click="zipClick(keysearchbutton)">Go</button>
 
                     </fieldset>
                 </form>

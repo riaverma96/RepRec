@@ -141,9 +141,18 @@ angular.module('d3App.controllers')
             score: 48
         }];
 
-        $scope.zipClick = function()
+        $scope.zipClick = function(button)
         {
-            console.log($scope.zipcode);
+            if (button.id == "/congressmenbutton")
+            {
+                $location.url('rep-page.html');
+            }
+            else if (button.id == "keysearchbutton")
+            {
+                $location.url('/bill-page.html');
+            }
+            $scope.$apply();
+            
         }
     }]);
 
