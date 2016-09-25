@@ -17,13 +17,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <!--button for visualization-->
 <button onClick="changeData()">Change Data</button>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="gradientPie.js"></script>
+<script src="app.js"></script>
 <script>
 
 
 var salesData=[
-	{label:"Basic", color:"#3366CC"},
-	{label:"Plus", color:"#DC3912"},
+	{label:"Basic", color:"#3366CC", value: "2"},
+	{label:"Plus", color:"#DC3912", value: "6"},
 	//{label:"Lite", color:"#FF9900"},
 	//{label:"Elite", color:"#109618"},
 	//{label:"Delux", color:"#990099"}
@@ -33,62 +33,68 @@ var svg = d3.select("body").append("svg").attr("width", 700).attr("height", 400)
 
 svg.append("g").attr("id","salespie");
 //svg.append("g").attr("id","quotespie");
-	
+
 gradPie.draw("salespie", randomData(), 200, 200, 160);
 //gradPie.draw("quotespie", randomData(), 500, 200, 100);
 
 function changeData(){
 	gradPie.transition("salespie", randomData(), 160);
-	//gradPie.transition("quotespie", randomData(), 100);
+	// gradPie.transition("quotespie", randomData(), 100);
 }
 
 function randomData(){
-	return salesData.map(function(d){ 
-		return {label:d.label, value:1000*Math.random(), color:d.color};});
+	return salesData.map(function(d){
+		return {label:d.label, value:d.value, color:d.color};});
 }
 </script>
 
 
-<!-- // insert the controller -->
+    <!-- // insert the controller -->
     <div  ng-controller="barchartController">
 
         <div class="title">{{title}}</div>
 
-        <!-- // add the input boxes to make interactive -->
-        <d3-bars data="d3Data" label="name"></d3-bars>
+          <!-- // add the input boxes to make interactive -->
+          <d3-bars data="d3Data" label="name"></d3-bars>
 
-        <br>
+          <br>
 
-        <span>Peter</span>
-        <br>
-        <input type="text" ng-model="d3Data[0].score"/>
-        <br>
+          <span>Peter</span>
+          <br>
+          <input type="text" ng-model="d3Data[0].score"/>
+          <br>
 
-        <span>Francis</span>
-        <br>
-        <input type="text" ng-model="d3Data[1].score"/>
-        <br>
+          <span>Francis</span>
+          <br>
+          <input type="text" ng-model="d3Data[1].score"/>
+          <br>
 
-        <span>Tabatha</span>
-        <br>
-        <input type="text" ng-model="d3Data[2].score"/>
-        <br>
+          <span>Tabatha</span>
+          <br>
+          <input type="text" ng-model="d3Data[2].score"/>
+          <br>
 
-        <span>Amber</span>
-        <br>
-        <input type="text" ng-model="d3Data[3].score"/>
-        <br>
+          <span>Amber</span>
+          <br>
+          <input type="text" ng-model="d3Data[3].score"/>
+          <br>
 
-        <span>David</span>
-        <br>
-        <input type="text" ng-model="d3Data[4].score"/>
-      </div>
+          <span>David</span>
+          <br>
+          <input type="text" ng-model="d3Data[4].score"/>
+        </div>
 
+      <!-- // insert the controller -->
+      <input type="text" ng-model="zipcode"/>
+      <button "congressmenbutton" type="submit"
+              class="pure-button" ng-click="zipClick ">Go</button>
+
+<<<<<<< HEAD
+=======
     </div>
 
+>>>>>>> origin/master
 </body>
-
-
 
 
 </html>
