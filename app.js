@@ -4,9 +4,6 @@ angular.module('d3App', [
     'd3App.controllers',
     'd3App.directives'
     ]);
-angular.module('zipApp', [
-    'zipApp.controllers'
-    ]);
 
 // setup dependency injection
 angular.module('d3', []);
@@ -145,11 +142,9 @@ angular.module('d3App.controllers')
         {
             console.log($scope.zipcode);
         }
-    }]);
 
-angular.module('zipApp')
-    .controller('zipController', ['$scope', function($scope) {
-
+        $scope.zipcode = 0;
+        console.log($scope.zipcode);
     }]);
 
 !function(){
